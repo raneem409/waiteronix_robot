@@ -1,0 +1,18 @@
+<launch>
+  <!-- Launch the robot_localization node -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node" output="screen">
+    <rosparam file="$(find imu_odom_t)/param/imu_22.yaml" command="load" /> 
+    <!--remap from="/odometry/filtered" to="/odom" /-->
+  </node>
+
+    <!-- TF Broadcaster for imu_link to base_link -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="imu_to_base_link_broadcaster" args="0 0 0 0 0 0 imu_link odom " />
+
+    <!-- TF Configuration -->
+    <!-- node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_odom_broadcaster" args="0 0 0 0 0 0 base_link odom " /-->
+
+
+
+</launch>
+
+
